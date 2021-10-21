@@ -1,6 +1,6 @@
 package com.garen.sort.quickSort;
 
-import com.garen.dataStructure.MyStack;
+import com.garen.dataStructure.stack.MyStack;
 import com.garen.util.ArrayUtil;
 
 public class QuickSort {
@@ -83,7 +83,7 @@ public class QuickSort {
     //将数组中等于（==） target 的数放在数组中小于区与大于区中间， 即中间区
     //将数组中大（>） target 的数放在数组中 target 的右边， 即大于区
     //一次就能排好等于区的所有数-->多个重复数效率快一点
-    //O(N^2)
+    //随机之后， O(nlogn)
     //额外空间复杂度： 最差 O(N)， 最好 O(logN)--> 需要记下等于区的下标
     private static void quickSort3(int[] arr, int left, int right) {
         if(left >= right){
@@ -100,7 +100,7 @@ public class QuickSort {
     //将数组中等于（==） target 的数放在数组中小于区与大于区中间， 即中间区
     //将数组中大（>） target 的数放在数组中 target 的右边， 即大于区
     //一次就能排好等于区的所有数-->多个重复数效率快一点
-    //O(N^2)
+    //随机之后， O(nlogn)
     //额外空间复杂度： 最差 O(N)， 最好 O(logN)--> 需要记下等于区的下标
     //非递归版，使用 栈（stack） 来记录相等区的位置
     private static void quickSortWithoutRecursion(int[] arr) {
