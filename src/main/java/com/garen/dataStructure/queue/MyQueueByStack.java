@@ -1,20 +1,24 @@
-package com.garen.dataStructure;
+package com.garen.dataStructure.queue;
 
+import com.garen.dataStructure.stack.MyStackByArray;
 
-//也可实现为动态调整长度的功能
-public class MyQueueByArray {
+//使用栈实现队列
+public class MyQueueByStack {
     private final int DEFAULT_LENGTH = 10;
-    private Integer[] arr;
-    private int addIndex = 0;
-    private int popIndex = 0;
+    private MyStackByArray baseStack =null;
+    private MyStackByArray helpStack =null;
     private int size = 0;
+    private int maxLength = 10;
 
-    public MyQueueByArray() {
-        arr = new Integer[DEFAULT_LENGTH];
+    public MyQueueByStack() {
+        baseStack = new MyStackByArray(DEFAULT_LENGTH);
+        helpStack = new MyStackByArray(DEFAULT_LENGTH);
     }
 
-    public MyQueueByArray(int length) {
-        arr = new Integer[length];
+    public MyQueueByStack(int length) {
+        baseStack = new MyStackByArray(length);
+        helpStack = new MyStackByArray(length);
+        maxLength = length;
     }
 
     public int getSize() {
@@ -22,34 +26,28 @@ public class MyQueueByArray {
     }
 
     public void add(int data){
-        if(size >= arr.length){
-            //也可实现为动态调整长度的功能
-            throw new RuntimeException("队列空间已经满了，不能继续添加");
+        if(size >= maxLength){
+            throw new RuntimeException("队列空间已满，无法继续插入数据。");
         }
-        arr[addIndex] = data;
-        size++;
-        addIndex++;
-        if(addIndex > (arr.length -1)){
-            addIndex =0;
-        }
+        baseStack.push(data);
+        size ++;
     }
 
     public Integer poll(){
-        if(size == 0){
-            return null;
+        for(int i=1; i<size;i++){
+            helpStack.push(baseStack.pop());
         }
-        Integer data = arr[popIndex];
-        popIndex++;
-        if(popIndex > (arr.length -1)){
-            popIndex =0;
+        Integer data = baseStack.pop();
+        size --;
+        for(int i=1; i<=size;i++){
+            baseStack.push(helpStack.pop());
         }
-        size--;
         return data;
     }
 
 
     public static void main(String[] args){
-        MyQueueByArray que = new MyQueueByArray(15);
+        MyQueueByStack que = new MyQueueByStack(15);
         try{
             que.add(1);
             que.add(2);

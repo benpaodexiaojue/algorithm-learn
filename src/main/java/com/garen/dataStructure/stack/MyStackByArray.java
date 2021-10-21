@@ -1,4 +1,4 @@
-package com.garen.dataStructure;
+package com.garen.dataStructure.stack;
 
 public class MyStackByArray {
     Integer[] arr = new Integer[10];

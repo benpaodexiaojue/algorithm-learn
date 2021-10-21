@@ -1,5 +1,7 @@
-package com.garen.dataStructure;
+package com.garen.dataStructure.queue;
 
+
+import com.garen.dataStructure.linkedList.DoubleDirectionLinkedNode;
 
 //也可实现为动态调整长度的功能
 public class MyQueueByLinkedList {

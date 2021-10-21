@@ -1,7 +1,7 @@
 package com.garen.util;
 
-import com.garen.dataStructure.DoubleDirectionLinkedNode;
-import com.garen.dataStructure.SingleLinkedNode;
+import com.garen.dataStructure.linkedList.DoubleDirectionLinkedNode;
+import com.garen.dataStructure.linkedList.SingleLinkedNode;
 
 import java.security.SecureRandom;
 

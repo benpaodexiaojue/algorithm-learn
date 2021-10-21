@@ -1,9 +1,11 @@
-package com.garen.dataStructure;
+package com.garen.dataStructure.stack;
+
+import com.garen.dataStructure.linkedList.DoubleDirectionLinkedNodeT;
 
 public class MyStack<T> {
     private final int DEFAULT_LENGTH = 10;
     private int maxLength = 10;
-    private DoubleDirectionLinkedNodeT head =null;
+    private DoubleDirectionLinkedNodeT<T> head =null;
     private int size = 0;
 
     public MyStack() {
@@ -21,7 +23,7 @@ public class MyStack<T> {
         if(size >= maxLength){
             throw new RuntimeException("栈空间已满，无法继续插入数据。");
         }
-        DoubleDirectionLinkedNodeT node = new DoubleDirectionLinkedNodeT(data);
+        DoubleDirectionLinkedNodeT<T> node = new DoubleDirectionLinkedNodeT<T>(data);
         if(head == null){
             head = node;
         }else{
@@ -34,8 +36,8 @@ public class MyStack<T> {
 
     public T pop(){
         if (head !=null){
-            DoubleDirectionLinkedNodeT next = head.getNext();
-            T data = (T) head.getData();
+            DoubleDirectionLinkedNodeT<T> next = head.getNext();
+            T data = head.getData();
             if(next !=null){
                 next.setPre(null);
             }
@@ -48,8 +50,7 @@ public class MyStack<T> {
 
     public T peak(){
         if (head !=null){
-            DoubleDirectionLinkedNodeT next = head.getNext();
-            return (T) head.getData();
+            return head.getData();
         }
         return null;
     }

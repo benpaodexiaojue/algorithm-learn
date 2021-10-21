@@ -1,15 +1,19 @@
-package com.garen.dataStructure;
-
-public class MyStackByQueue {
-    MyQueueByArray baseQue=null;
-    MyQueueByArray helpQue=null;
-    int maxLength=0;
-    int size = 0;
+package com.garen.dataStructure.stack;
 
 
-    public MyStackByQueue(int length) {
-        baseQue = new MyQueueByArray(length);
-        helpQue = new MyQueueByArray(length);
+import com.garen.dataStructure.linkedList.DoubleDirectionLinkedNode;
+
+//也可实现为动态调整长度的功能
+public class MyStackByLinkedList {
+    private final int DEFAULT_LENGTH = 10;
+    private int maxLength = 10;
+    private DoubleDirectionLinkedNode head =null;
+    private int size = 0;
+
+    public MyStackByLinkedList() {
+    }
+
+    public MyStackByLinkedList(int length) {
         maxLength = length;
     }
 
@@ -19,39 +23,43 @@ public class MyStackByQueue {
 
     public void push(int data){
         if(size >= maxLength){
-            throw new RuntimeException("栈空间已经满了， 不能继续添加数据！！");
+            throw new RuntimeException("栈空间已满，无法继续插入数据。");
         }
-        baseQue.add(data);
-        size ++;
+        DoubleDirectionLinkedNode node = new DoubleDirectionLinkedNode(data);
+        if(head == null){
+            head = node;
+        }else{
+            head.setPre(node);
+            node.setNext(head);
+            head = node;
+        }
+         size ++;
     }
-    
+
     public Integer pop(){
-        for(int i=1; i<size; i++){
-            helpQue.add(baseQue.poll());
+        if (head !=null){
+            DoubleDirectionLinkedNode next = head.getNext();
+            int data = head.getData();
+            if(next !=null){
+                next.setPre(null);
+            }
+            head = next;
+            size --;
+            return data;
         }
-        Integer data = baseQue.poll();
-        size --;
-        MyQueueByArray temp = helpQue;
-        helpQue = baseQue;
-        baseQue = temp;
-        return data;
+        return null;
     }
 
     public Integer peak(){
-        for(int i=1; i<size; i++){
-            helpQue.add(baseQue.poll());
+        if (head !=null){
+            return head.getData();
         }
-        Integer data = baseQue.poll();
-        helpQue.add(data);
-        for(int i=1; i<=size; i++){
-            baseQue.add(helpQue.poll());
-        }
-        return data;
+        return null;
     }
 
 
     public static void main(String[] args){
-        MyStackByQueue stack = new MyStackByQueue(15);
+        MyStackByArray stack = new MyStackByArray(15);
         try{
             stack.push(1);
             stack.push(2);
@@ -75,7 +83,6 @@ public class MyStackByQueue {
         System.out.println("stack size:" + stack.getSize());
         int size = stack.getSize();
         for(int i = 0; i< size; i++){
-            System.out.println(stack.peak());
             System.out.println(stack.pop());
         }
         System.out.println("stack size:" + stack.getSize());
@@ -92,7 +99,6 @@ public class MyStackByQueue {
         System.out.println("stack size:" + stack.getSize());
         int size1 = stack.getSize();
         for(int i = 0; i< size1; i++){
-            System.out.println(stack.peak());
             System.out.println(stack.pop());
         }
         System.out.println("stack size:" + stack.getSize());

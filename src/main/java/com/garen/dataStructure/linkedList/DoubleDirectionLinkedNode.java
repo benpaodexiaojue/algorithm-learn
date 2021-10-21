@@ -1,4 +1,4 @@
-package com.garen.dataStructure;
+package com.garen.dataStructure.linkedList;
 
 
 public class DoubleDirectionLinkedNode {
