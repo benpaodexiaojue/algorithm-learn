@@ -59,6 +59,19 @@ public class ArrayUtil {
         }
         System.out.println();
     }
+    public static void printArray(int[] arr, int start, int end) {
+        for(int i = start; i <= end; i ++){
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void printArray(Object[] arr, int start, int end) {
+        for(int i = start; i <= end; i ++){
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
 
     public static void printSingleLinkedList(SingleLinkedNode head) {
         SingleLinkedNode cur = head;
